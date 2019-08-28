@@ -1,0 +1,278 @@
+<?xml version="1.0" ?>
+
+<!-- 
+	Full "abstract page" (or splash page or summary page, depending on your jargon) for an eprint. 
+-->
+
+<cite:citation xmlns="http://www.w3.org/1999/xhtml" xmlns:epc="http://eprints.org/ep3/control" xmlns:cite="http://eprints.org/ep3/citation" >
+
+  <div class="dorian-main">
+
+  <!-- TAB CONTROLS -->
+  <div class="dorian-bar ep-bg">
+        <epc:if test="$item.has_type('image')">
+            <button class="dorian-bar-item dorian-button tablink ep-fg" onclick="openTab(event,'Images')">Images</button>
+        </epc:if>
+        <epc:if test="$item.has_type('video')">
+            <button class="dorian-bar-item dorian-button tablink" onclick="openTab(event,'Video')">Video</button>
+        </epc:if>
+        <epc:if test="$item.has_type('audio')">
+            <button class="dorian-bar-item dorian-button tablink" onclick="openTab(event,'Audio')">Audio</button>
+        </epc:if>
+    <button class="dorian-bar-item dorian-button tablink" onclick="openTab(event,'Downloads')">Downloads</button>
+    <button class="dorian-bar-item dorian-button tablink" onclick="openTab(event,'Metadata')">Metadata</button>
+  </div>
+
+<!-- IMAGES --> 
+<epc:if test="$item.has_type('image')">
+  <epc:set name='images' expr="$item.get_type('image')">
+  <div id="Images" class="dorian-container dorian-border dorian-panel">
+    <div id="image_container" class="free-wall picture">
+        <epc:foreach expr="$images" iterator="image">
+          <div class="item brick">
+		  <a href="{$image.url()}" itemprop="contentUrl" data-size="{$image.property('media_width')}x{$image.property('media_height')}">
+			<img src="{$image.thumbnail_url('preview')}" itemprop="thumbnail" alt="Image description" data-index="{$index}" />
+              </a>
+          </div>
+        </epc:foreach>
+    </div>
+  </div>
+  </epc:set>
+</epc:if>
+
+<!-- VIDEO -->
+<epc:if test="$item.has_type('video') or $item.url_is_video('official_url')">
+  <epc:set name='videos' expr="$item.get_type('video')">
+     <div id="Video" class="dorian-container dorian-border dorian-panel" style="display:none">
+	<!-- LOOP THROUGH ITEM VIDEO FILES and youtube/vimeo urls -->
+        <epc:foreach expr="$videos" iterator="video">
+          <div class="plyr_container">
+		<video id="plyr_{$index}" playsinline="true" controls="true" 
+			data-doc-title="{$video.property('main')}"
+			class="video">
+	     <source src="{$video.url()}" type="{$video.property('mime_type')}" />
+	       <!-- Captions are optional -->
+	       <!-- <track kind="captions" label="English captions" src="/path/to/captions.vtt" srclang="en" default />-->
+              </video>
+	  </div>
+        </epc:foreach>
+	<epc:if test="$item.property('official_url') and $item.url_is_video('official_url')">
+          <div class="plyr_container">
+	    <div class="plyr__video-embed" id="player_official_url">
+		<iframe
+			src="{$item.url_to_embed('official_url')}"
+		    allowfullscreen="true"
+		    allowtransparency="true"
+		    allow="autoplay"></iframe>
+	     </div>
+	   </div>
+	 </epc:if>
+     </div>
+  </epc:set> 
+</epc:if>
+
+<!-- AUDIO -->
+<epc:if test="$item.has_type('audio')">
+  <epc:set name='audios' expr="$item.get_type('audio')">
+  <div id="Audio" class="dorian-container dorian-border dorian-panel" style="display:none">
+        <epc:foreach expr="$audios" iterator="audio">
+          <div class="plyr_container">
+		<video poster="" id="audio_plyr_{$index}" playsinline="true" controls="true"
+			data-doc-title="{$audio.property('main')}"
+			class="audio">
+	     		<source src="{$audio.url()}" type="{$audio.property('mime_type')}" />
+     		</video>
+	</div>
+    </epc:foreach>
+    <!-- <epc:comment> Maybe do embedding of audio services... maybe sound cloud. Not supported by plyr, but maybe a default soundcloud iframe 
+	<epc:if test="$item.property('official_url') and $item.url_is_audio('official_url')">
+	    <div class="plyr__video-embed" id="player_official_url">
+		<iframe
+			src="{$item.url_to_embed_audio('official_url')}"
+		    allowfullscreen="true"
+		    allowtransparency="true"
+		    allow="autoplay"></iframe>
+	    </div>
+	 </epc:if>
+	</epc:comment> 	-->
+  </div>
+  </epc:set> 
+</epc:if>
+
+<!-- DOWNLOADS AKA everything else -->
+
+  <div id="Downloads" class="dorian-container dorian-border dorian-panel" style="display:none">
+
+     <div class="downloads_container">
+
+  <epc:set name='docs' expr='$item.documents()'>
+
+    <epc:if test="length($docs) = 0">
+      <epc:phrase ref="page:nofulltext" />
+      <epc:if test="$item.contact_email().is_set() and eprint_status = 'archive'">
+        (<a href="{$config{http_cgiurl}}/request_doc?eprintid={eprintid}"><epc:phrase ref="request:button" /></a>)
+      </epc:if>
+    </epc:if>
+  
+    <epc:if test="length($docs) gt 0">
+      <epc:phrase ref="page:fulltext" />
+      <table>
+        <epc:foreach expr="$docs" iterator="doc">
+          <tr>
+            <td valign="top" align="right"><epc:print expr="$doc.icon('HoverPreview','noNewWindow')}" /></td>
+            <td valign="top">
+              <epc:print expr="$doc.citation('default')" /><br />
+              <a href="{$doc.url()}" class="ep_document_link"><epc:phrase ref="summary_page:download"/> (<epc:print expr="$doc.doc_size().human_filesize()" />)</a>
+              <epc:if test="!$doc.is_public() and $item.contact_email().is_set() and eprint_status = 'archive'">
+                | <a href="{$config{http_cgiurl}}/request_doc?docid={$doc{docid}"><epc:phrase ref="request:button" /></a>
+              </epc:if>
+  
+              <ul>
+              <epc:foreach expr="$doc.related_objects('http://eprints.org/relation/hasVersion')" iterator="rel">
+                <epc:if test="$rel{relation_type}!='http://eprints.org/relation/isVolatileVersionOf'">
+                  <li><epc:print expr="$rel.citation_link('default')" /></li>
+                </epc:if>
+              </epc:foreach>
+              </ul>
+            </td>
+          </tr>
+        </epc:foreach>
+      </table>
+    </epc:if>
+
+  </epc:set>
+  </div>
+</div>
+
+<!-- METADATA -->
+
+ <div id="Metadata" class="dorian-container dorian-border dorian-panel" style="display:none">
+
+   <div class="metadata_container">
+
+  <epc:if test="official_url">
+    <div style="margin-bottom: 1em">
+      <epc:phrase ref="eprint_fieldname_official_url"/>: <epc:print expr="official_url" />
+    </div>
+  </epc:if>
+
+  <table style="margin-bottom: 1em; margin-top: 1em;" cellpadding="3">
+    <tr>
+      <th align="right"><epc:phrase ref="eprint_fieldname_type" />:</th>
+      <td>
+        <epc:print expr="type" />
+        <epc:if test="type = 'conference_item'">(<epc:print expr="pres_type" />)</epc:if>
+        <epc:if test="type = 'monograph'">(<epc:print expr="monograph_type" />)</epc:if>
+        <epc:if test="type = 'thesis'">(<epc:print expr="thesis_type" />)</epc:if>
+      </td>
+    </tr>
+    <epc:comment> 
+       The below block loops over a list of field names taken from eprint_render.pl
+       Edit the list of metadata to show in the summary page table in eprint_render.pl
+    </epc:comment>
+    <epc:foreach expr="$config{summary_page_metadata}" iterator="fieldname">
+      <epc:if test="is_set($item.property($fieldname))">
+        <tr>
+          <th align="right"><epc:phrase ref="eprint_fieldname_{$fieldname}" />:</th>
+          <td valign="top"><epc:print expr="$item.property($fieldname)" /></td>
+        </tr>
+      </epc:if>
+    </epc:foreach>
+    <tr>
+      <th align="right">URI:</th>
+      <td valign="top"><a href="{$item.uri()}"><epc:print expr="$item.uri()" /></a></td>
+    </tr>
+  </table>
+ </div>
+ </div>
+
+</div> <!-- end of tabbed stuff -->
+
+<!-- Photoswipe container for slide show-->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader - - active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"> </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"> </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+const VE_CONFIG = {};
+//]]>
+VE_CONFIG.use_images_as_posters = false;
+<epc:if test="$config{dorian}{use_images_as_posters} = 'TRUE'">
+VE_CONFIG.use_images_as_posters = true;
+</epc:if>
+
+//<![CDATA[
+
+jQuery(function() {
+
+	jQuery('.video').each( function(ind) {
+		init_plyr(this, ind);
+    	});
+   	//check a url that we think is an embedable videos  (no need for plyr+_config for 3rd party vids)
+    	if(jQuery('#player_official_url').length>0){
+		new Plyr('#player_official_url');
+    	}
+
+    	jQuery('.audio').each( function(ind) {
+		init_plyr(this,ind);
+    	});
+	
+	function init_plyr(el, index){
+		const plyr_config = {};
+		plyr_config.title = jQuery(el).data("doc-title");
+		//use the image with same index for poster
+		if( VE_CONFIG.use_images_as_posters && jQuery('.picture a img').length > 0 &&  jQuery('.picture a img').eq(index) !== undefined){
+			jQuery(el).attr("poster", jQuery('.picture a img').eq(index).attr("src"));
+		}
+		//		console.log("plyr_config: ",plyr_config);
+		new Plyr('#'+jQuery(el).attr("id"), plyr_config );	
+	}
+});
+//]]>
+</script>
+
+</cite:citation>
+

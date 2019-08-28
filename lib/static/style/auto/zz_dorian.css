@@ -1,0 +1,73 @@
+/* free wall does the fancy thumbnails, here's some css */
+.free-wall {
+    margin: 15px;
+}
+.brick {
+    width: 221.2px;
+}
+.info {
+    padding: 15px;
+    color: #333;
+}
+.brick img {
+    margin: 0px;
+    padding: 0px;
+    display: block;
+}
+
+.item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	overflow: hidden;
+}
+.item img {
+	flex-shrink: 0;
+	min-width: 100%;
+	min-height: 100%
+}
+
+
+/* style and placement for the main container and things in it */
+.dorian-main {
+	margin-top:20px;
+}
+
+.dorian-container:after,.dorian-container:before,.dorian-bar:before,.dorian-bar:after{content:"";display:table;clear:both}
+.dorian-container{padding:0.01em 16px}.w3-panel{margin-top:16px;margin-bottom:16px}
+
+.dorian-bar{width:100%;overflow:hidden}.w3-center 
+.dorian-bar{display:inline-block;width:auto}
+.dorian-bar .dorian-bar-item{padding:8px 16px;float:left;width:auto;border:none;display:block;outline:0}
+.dorian-bar .dorian-button{white-space:normal}
+
+.dorian-button{border:none;display:inline-block;padding:8px 16px;vertical-align:middle;overflow:hidden;text-decoration:none;color:inherit;background-color:inherit;text-align:center;cursor:pointer;white-space:nowrap}
+.dorian-button{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}   
+.dorian-disabled,.dorian-button:disabled{cursor:not-allowed;opacity:0.3}.w3-disabled *,:disabled *{pointer-events:none}
+
+.dorian-container {
+	padding: 0px;
+}
+.dorian-button:hover {
+    color: #fff!important;
+    background-color: #279ae2!important;
+}
+
+.ep-bg {
+	color: #fff!important;
+	background-color: #204f76!important;
+}
+.ep-fg {
+    color: #fff!important;
+    background-color: #279ae2!important;
+}
+
+.plyr_container {
+	margin: 10px;
+}
+.downloads_container {
+	margin: 10px;
+}
+.metadata_container {
+	margin: 10px;
+}
