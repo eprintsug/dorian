@@ -5,4 +5,4 @@ $c->{dorian}->{youtube_options} = "?origin=https://plyr.io&amp;iv_load_policy=3&
 #If this is 'TRUE' the plyr will match images with videos and use the images as "posters" for the videos
 $c->{dorian}->{use_images_as_posters}  = 'TRUE';
 
-
+$c->{dorian}->{mime_exceptions} = [ qw# video/quicktime # ];

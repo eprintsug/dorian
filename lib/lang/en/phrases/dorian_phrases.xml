@@ -23,4 +23,7 @@
 	<script src="https://cdn.plyr.io/3.5.2/plyr.polyfilled.js"></script>
 
      </epp:phrase>
+    <epp:phrase id="document_fieldname_media_width">Media Width</epp:phrase>
+    <epp:phrase id="document_fieldname_media_height">Media Height</epp:phrase>
+
 </epp:phrases>

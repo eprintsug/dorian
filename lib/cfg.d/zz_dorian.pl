@@ -3,7 +3,7 @@ $c->{dorian}->{get_docs_by_type} = sub {
 	my ($repo, $eprint, $type) = @_;
    	my $docs = [];
     	for my $doc ($eprint->get_all_documents){
-        	if($doc->value("mime_type") =~ m#^$type/#){
+            if($doc->value("mime_type") =~ m#^$type/# && !grep $_ eq $doc->value("mime_type"), @{$repo->get_conf("dorian","mime_exceptions")}){
                 	push @{$docs}, $doc;
         	}
     	}
@@ -53,16 +53,31 @@ sub run_has_type
     {
         $self->runtime_error( "has_type() must be called on an eprint object. not : ".$eprint->[0] );
     }
+    my $repo = $state->{session}->get_repository;
     my $has = 0;
     my $type = $arg->[0];
     for my $doc ($eprint->[0]->get_all_documents){
-        if($doc->value("mime_type") =~ m#^$type/#){
+        if($doc->value("mime_type") =~ m#^$type/# && !grep $_ eq $doc->value("mime_type"), @{$repo->get_conf("dorian","mime_exceptions")}){
                 $has = 1;
                 last;
         }
     }
     return [$has, "BOOLEAN"];
 }
+
+sub run_has_docs
+{
+    my( $self, $state, $eprint, $arg ) = @_;
+
+    if( ! $eprint->[0]->isa( "EPrints::DataObj::EPrint") )
+    {
+        $self->runtime_error( "has_docs) must be called on an eprint object. not : ".$eprint->[0] );
+    }
+    my $docs = $eprint->[0]->get_all_documents;
+    my $has = $docs > 0  ? 1 : 0;
+    return [$docs, "BOOLEAN"];
+}
+
 
 sub run_get_type
 {

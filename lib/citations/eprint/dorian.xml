@@ -11,16 +11,20 @@
   <!-- TAB CONTROLS -->
   <div class="dorian-bar ep-bg">
         <epc:if test="$item.has_type('image')">
-            <button class="dorian-bar-item dorian-button tablink ep-fg" onclick="openTab(event,'Images')">Images</button>
+            <button class="dorian-bar-item dorian-button tablink ep-fg" onclick="openTab(event,'Images')" data-panel="Images">Images</button>
         </epc:if>
-        <epc:if test="$item.has_type('video')">
-            <button class="dorian-bar-item dorian-button tablink" onclick="openTab(event,'Video')">Video</button>
+        <epc:if test="$item.has_type('video') or $item.url_is_video('official_url')">
+            <button class="dorian-bar-item dorian-button tablink" onclick="openTab(event,'Video')" data-panel="Video">Video</button>
         </epc:if>
         <epc:if test="$item.has_type('audio')">
-            <button class="dorian-bar-item dorian-button tablink" onclick="openTab(event,'Audio')">Audio</button>
+            <button class="dorian-bar-item dorian-button tablink" onclick="openTab(event,'Audio')" data-panel="Audio">Audio</button>
         </epc:if>
-    <button class="dorian-bar-item dorian-button tablink" onclick="openTab(event,'Downloads')">Downloads</button>
-    <button class="dorian-bar-item dorian-button tablink" onclick="openTab(event,'Metadata')">Metadata</button>
+        <epc:if test="$item.has_docs() and ($item.has_type('image') or $item.has_type('video') or $item.has_type('audio'))">
+            <button class="dorian-bar-item dorian-button tablink" onclick="openTab(event,'Downloads')" data-panel="Downloads">Downloads</button>
+        </epc:if>
+        <epc:if test="($item.has_docs() and ($item.has_type('image') or $item.has_type('video') or $item.has_type('audio'))) or $item.url_is_video('official_url'))">
+            <button id="Metadata-button" class="dorian-bar-item dorian-button tablink" onclick="openTab(event,'Metadata')" data-panel="Metadata">Metadata</button>
+        </epc:if>
   </div>
 
 <!-- IMAGES --> 
@@ -77,13 +81,13 @@
   <div id="Audio" class="dorian-container dorian-border dorian-panel" style="display:none">
         <epc:foreach expr="$audios" iterator="audio">
           <div class="plyr_container">
-		<video poster="" id="audio_plyr_{$index}" playsinline="true" controls="true"
+		    <video poster="" id="audio_plyr_{$index}" playsinline="true" controls="true"
 			data-doc-title="{$audio.property('main')}"
 			class="audio">
 	     		<source src="{$audio.url()}" type="{$audio.property('mime_type')}" />
      		</video>
-	</div>
-    </epc:foreach>
+	      </div>
+        </epc:foreach>
     <!-- <epc:comment> Maybe do embedding of audio services... maybe sound cloud. Not supported by plyr, but maybe a default soundcloud iframe 
 	<epc:if test="$item.property('official_url') and $item.url_is_audio('official_url')">
 	    <div class="plyr__video-embed" id="player_official_url">
@@ -100,49 +104,47 @@
 </epc:if>
 
 <!-- DOWNLOADS AKA everything else -->
-
+<epc:if test="$item.has_docs() and ($item.has_type('image') or $item.has_type('video') or $item.has_type('audio'))">
+    <!-- if we have docs either multimedia or additional to mm we have a dowloads panel -->
   <div id="Downloads" class="dorian-container dorian-border dorian-panel" style="display:none">
-
      <div class="downloads_container">
-
-  <epc:set name='docs' expr='$item.documents()'>
-
-    <epc:if test="length($docs) = 0">
-      <epc:phrase ref="page:nofulltext" />
-      <epc:if test="$item.contact_email().is_set() and eprint_status = 'archive'">
-        (<a href="{$config{http_cgiurl}}/request_doc?eprintid={eprintid}"><epc:phrase ref="request:button" /></a>)
-      </epc:if>
-    </epc:if>
-  
-    <epc:if test="length($docs) gt 0">
-      <epc:phrase ref="page:fulltext" />
-      <table>
-        <epc:foreach expr="$docs" iterator="doc">
-          <tr>
-            <td valign="top" align="right"><epc:print expr="$doc.icon('HoverPreview','noNewWindow')}" /></td>
-            <td valign="top">
-              <epc:print expr="$doc.citation('default')" /><br />
-              <a href="{$doc.url()}" class="ep_document_link"><epc:phrase ref="summary_page:download"/> (<epc:print expr="$doc.doc_size().human_filesize()" />)</a>
-              <epc:if test="!$doc.is_public() and $item.contact_email().is_set() and eprint_status = 'archive'">
-                | <a href="{$config{http_cgiurl}}/request_doc?docid={$doc{docid}"><epc:phrase ref="request:button" /></a>
-              </epc:if>
-  
-              <ul>
-              <epc:foreach expr="$doc.related_objects('http://eprints.org/relation/hasVersion')" iterator="rel">
-                <epc:if test="$rel{relation_type}!='http://eprints.org/relation/isVolatileVersionOf'">
-                  <li><epc:print expr="$rel.citation_link('default')" /></li>
-                </epc:if>
-              </epc:foreach>
-              </ul>
-            </td>
-          </tr>
-        </epc:foreach>
-      </table>
-    </epc:if>
-
-  </epc:set>
+      <epc:set name='docs' expr='$item.documents()'>
+        <epc:if test="length($docs) = 0">
+          <epc:phrase ref="page:nofulltext" />
+          <epc:if test="$item.contact_email().is_set() and eprint_status = 'archive'">
+            (<a href="{$config{http_cgiurl}}/request_doc?eprintid={eprintid}"><epc:phrase ref="request:button" /></a>)
+          </epc:if>
+        </epc:if>
+      
+        <epc:if test="length($docs) gt 0">
+          <epc:phrase ref="page:fulltext" />
+          <table>
+            <epc:foreach expr="$docs" iterator="doc">
+              <tr>
+                <td valign="top" align="right"><epc:print expr="$doc.icon('HoverPreview','noNewWindow')}" /></td>
+                <td valign="top">
+                  <epc:print expr="$doc.citation('default')" /><br />
+                  <a href="{$doc.url()}" class="ep_document_link"><epc:phrase ref="summary_page:download"/> (<epc:print expr="$doc.doc_size().human_filesize()" />)</a>
+                  <epc:if test="!$doc.is_public() and $item.contact_email().is_set() and eprint_status = 'archive'">
+                    | <a href="{$config{http_cgiurl}}/request_doc?docid={$doc{docid}"><epc:phrase ref="request:button" /></a>
+                  </epc:if>
+      
+                  <ul>
+                  <epc:foreach expr="$doc.related_objects('http://eprints.org/relation/hasVersion')" iterator="rel">
+                    <epc:if test="$rel{relation_type}!='http://eprints.org/relation/isVolatileVersionOf'">
+                      <li><epc:print expr="$rel.citation_link('default')" /></li>
+                    </epc:if>
+                  </epc:foreach>
+                  </ul>
+                </td>
+              </tr>
+            </epc:foreach>
+          </table>
+        </epc:if>
+      </epc:set>
+    </div>
   </div>
-</div>
+</epc:if>
 
 <!-- METADATA -->
 
@@ -150,13 +152,55 @@
 
    <div class="metadata_container">
 
-  <epc:if test="official_url">
-    <div style="margin-bottom: 1em">
-      <epc:phrase ref="eprint_fieldname_official_url"/>: <epc:print expr="official_url" />
-    </div>
-  </epc:if>
+    <epc:if test="!$item.has_type('image') and !$item.has_type('video') !$item.has_type('audio') ">
+    <!-- we only have downloadable docs? just show trad. EPrints page (no bar) -->
+      <epc:set name='docs' expr='$item.documents()'>
+
+        <epc:if test="length($docs) = 0">
+          <epc:phrase ref="page:nofulltext" />
+          <epc:if test="$item.contact_email().is_set() and eprint_status = 'archive'">
+            (<a href="{$config{http_cgiurl}}/request_doc?eprintid={eprintid}"><epc:phrase ref="request:button" /></a>)
+          </epc:if>
+        </epc:if>
+      
+        <epc:if test="length($docs) gt 0">
+          <epc:phrase ref="page:fulltext" />
+          <table>
+            <epc:foreach expr="$docs" iterator="doc">
+              <tr>
+                <td valign="top" align="right"><epc:print expr="$doc.icon('HoverPreview','noNewWindow')}" /></td>
+                <td valign="top">
+                  <epc:print expr="$doc.citation('default')" /><br />
+                  <a href="{$doc.url()}" class="ep_document_link"><epc:phrase ref="summary_page:download"/> (<epc:print expr="$doc.doc_size().human_filesize()" />)</a>
+                  <epc:if test="!$doc.is_public() and $item.contact_email().is_set() and eprint_status = 'archive'">
+                    | <a href="{$config{http_cgiurl}}/request_doc?docid={$doc{docid}"><epc:phrase ref="request:button" /></a>
+                  </epc:if>
+      
+                  <ul>
+                  <epc:foreach expr="$doc.related_objects('http://eprints.org/relation/hasVersion')" iterator="rel">
+                    <epc:if test="$rel{relation_type}!='http://eprints.org/relation/isVolatileVersionOf'">
+                      <li><epc:print expr="$rel.citation_link('default')" /></li>
+                    </epc:if>
+                  </epc:foreach>
+                  </ul>
+                </td>
+              </tr>
+            </epc:foreach>
+          </table>
+        </epc:if>
+
+      </epc:set>
+
+    </epc:if>
+
 
   <table style="margin-bottom: 1em; margin-top: 1em;" cellpadding="3">
+      <epc:if test="official_url">
+        <tr>
+          <th align="right"><epc:phrase ref="eprint_fieldname_official_url" />:</th>
+          <td valign="top"><epc:print expr="official_url" /></td>
+        </tr>
+      </epc:if>
     <tr>
       <th align="right"><epc:phrase ref="eprint_fieldname_type" />:</th>
       <td>
