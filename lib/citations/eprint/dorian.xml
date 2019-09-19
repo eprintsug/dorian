@@ -134,16 +134,18 @@
 		    </figure>
 		  </a>
 		 </epc:foreach>
-         <epc:if test="{$config{plugins}{'Export::IIIFManifest'}}">
-		  <a href="https://iiif.io/about/">
+         	<epc:if test="iiif_manifest_enabled()">
+		  <a href="{$config{http_cgiurl}}/export/eprint/{$item.property('eprintid')}/IIIFManifest/nuatest-eprint-{$item.property('eprintid')}.js">
 		   <figure>
 	  	     <img src="{$config{rel_path}}/images/International_Image_Interoperability_Framework_logo.png" width="68px"/>
 		     <figcaption>
-			<a href="{$config{http_cgiurl}}/export/eprint/{$item.property('eprintid')}/IIIFManifest/nuatest-eprint-{$item.property('eprintid')}.js">Export IIIF Manifest</a>
+			Export IIIF Manifest
+			<br/>
+			<a href="https://iiif.io/about/">What is IIIF?</a>
 		     </figcaption>
 		   </figure>
-	      </a>
-         </epc:if>
+	      	 </a>
+         	</epc:if>
 		</div>
         </epc:if>
       </epc:set>

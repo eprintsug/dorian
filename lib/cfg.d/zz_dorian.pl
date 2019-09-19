@@ -153,3 +153,15 @@ sub run_is_image
 
 }
 
+sub run_iiif_manifest_enabled {
+
+	my( $self, $state, $eprint, $arg ) = @_;
+
+    	my $repo = $state->{session}->get_repository;
+	my $iiif_disable = $repo->get_conf('plugins','Export::IIIFManifest','params','disable');
+	print STDERR "iiif diable value: $iiif_disable\n";
+	return [1, "BOOLEAN"] if(defined $iiif_disable && $iiif_disable == 0) ;
+
+	return [0, "BOOLEAN"]
+}
+
