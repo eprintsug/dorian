@@ -41,17 +41,17 @@
           <datasetid>document</datasetid>
           <filename>cfg.d/zz_dorian.pl</filename>
           <mime_type>text/plain</mime_type>
-          <hash>9de440623df790ba9f8a5f62b6d6a4c1</hash>
+          <hash>db344b2cca6ec13a7d4a245151963ca4</hash>
           <hash_type>MD5</hash_type>
-          <filesize>4304</filesize>
+          <filesize>4673</filesize>
         </file>
         <file>
           <datasetid>document</datasetid>
           <filename>citations/eprint/dorian.xml</filename>
           <mime_type>application/xml</mime_type>
-          <hash>37cc2d35ee000083b449e1e67b76b8ff</hash>
+          <hash>ce28cba8e4dfe6de40244ec98439bd3b</hash>
           <hash_type>MD5</hash_type>
-          <filesize>14044</filesize>
+          <filesize>14055</filesize>
         </file>
         <file>
           <datasetid>document</datasetid>
@@ -78,7 +78,7 @@
       <id>you@email.address</id>
     </item>
   </creators>
-  <datestamp>2019-09-19 07:03:21</datestamp>
+  <datestamp>2019-09-19 08:41:20</datestamp>
   <title>Dorian</title>
   <description>This is the description.</description>
   <requirements>The following modules are required: X, Y, Z</requirements>
