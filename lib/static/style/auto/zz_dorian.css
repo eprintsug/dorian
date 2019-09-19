@@ -71,3 +71,76 @@
 .metadata_container {
 	margin: 10px;
 }
+
+li img:hover {
+border: 5px solid #F15123;
+}
+
+div.downloads_grid {
+
+  	display: flex;
+  	flex-wrap: wrap;
+
+	a {
+	  display: inline-block;
+	  margin-bottom: 8px;
+	  width: calc(50% - 4px);
+	  margin-right: 8px;
+	  text-decoration: none;
+	  color: black;
+	}
+
+	a:nth-of-type(2n) {
+	  margin-right: 0;
+	}
+
+	@media screen and (min-width: 50em) {
+	  a {
+	    width: calc(25% - 6px);
+	  }
+	  
+	  a:nth-of-type(2n) {
+	    margin-right: 8px;
+	  }
+	  
+	  a:nth-of-type(4n) {
+	    margin-right: 0;
+	  }
+	}
+
+	a:hover img {
+	  transform: scale(1.15);
+	}
+
+	figure {
+	  margin: 0;
+	  overflow: hidden;
+	}
+
+	figcaption {
+	  margin-top: 15px;
+	}
+
+	img {
+	  border: none;
+	  max-width: 100%;
+	  height: auto;
+	  display: block;
+	  background: #ccc;
+	  transition: transform .2s ease-in-out;
+	}
+
+	.p a {
+	  display: inline;
+	  font-size: 13px;
+	  margin: 0;
+	  text-decoration: underline;
+	  color: blue;
+	}
+
+	.p {
+	  text-align: center;
+	  font-size: 13px;
+	  padding-top: 100px;
+	}
+}

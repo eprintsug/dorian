@@ -118,28 +118,33 @@
       
         <epc:if test="length($docs) gt 0">
           <epc:phrase ref="page:fulltext" />
-          <table>
-            <epc:foreach expr="$docs" iterator="doc">
-              <tr>
-                <td valign="top" align="right"><epc:print expr="$doc.icon('HoverPreview','noNewWindow')}" /></td>
-                <td valign="top">
-                  <epc:print expr="$doc.citation('default')" /><br />
-                  <a href="{$doc.url()}" class="ep_document_link"><epc:phrase ref="summary_page:download"/> (<epc:print expr="$doc.doc_size().human_filesize()" />)</a>
-                  <epc:if test="!$doc.is_public() and $item.contact_email().is_set() and eprint_status = 'archive'">
-                    | <a href="{$config{http_cgiurl}}/request_doc?docid={$doc{docid}"><epc:phrase ref="request:button" /></a>
-                  </epc:if>
-      
-                  <ul>
-                  <epc:foreach expr="$doc.related_objects('http://eprints.org/relation/hasVersion')" iterator="rel">
-                    <epc:if test="$rel{relation_type}!='http://eprints.org/relation/isVolatileVersionOf'">
-                      <li><epc:print expr="$rel.citation_link('default')" /></li>
-                    </epc:if>
-                  </epc:foreach>
-                  </ul>
-                </td>
-              </tr>
-            </epc:foreach>
-          </table>
+		<div class="downloads_grid">
+		 <epc:foreach expr="$docs" iterator="doc">
+		  <a href="{$doc.url()}">
+		    <figure>
+<!--		      <epc:print expr="$doc.icon('HoverPreview','noNewWindow')}" /> -->
+		      <epc:print expr="$doc.icon()" />
+		      <figcaption>
+			  <epc:print expr="$doc.citation('default')" /><br />
+			  <a href="{$doc.url()}" class="ep_document_link"><epc:phrase ref="summary_page:download"/> (<epc:print expr="$doc.doc_size().human_filesize()" />)</a>
+			  <epc:if test="!$doc.is_public() and $item.contact_email().is_set() and eprint_status = 'archive'">
+			    | <a href="{$config{http_cgiurl}}/request_doc?docid={$doc{docid}"><epc:phrase ref="request:button" /></a>
+			  </epc:if>
+		      </figcaption>
+		    </figure>
+		  </a>
+		 </epc:foreach>
+         <epc:if test="{$config{plugins}{'Export::IIIFManifest'}}">
+		  <a href="https://iiif.io/about/">
+		   <figure>
+	  	     <img src="{$config{rel_path}}/images/International_Image_Interoperability_Framework_logo.png" width="68px"/>
+		     <figcaption>
+			<a href="{$config{http_cgiurl}}/export/eprint/{$item.property('eprintid')}/IIIFManifest/nuatest-eprint-{$item.property('eprintid')}.js">Export IIIF Manifest</a>
+		     </figcaption>
+		   </figure>
+	      </a>
+         </epc:if>
+		</div>
         </epc:if>
       </epc:set>
     </div>
