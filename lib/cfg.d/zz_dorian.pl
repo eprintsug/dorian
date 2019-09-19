@@ -97,6 +97,8 @@ sub run_get_type
 
     return [$docs, "ARRAY"];
 }
+
+
 sub run_url_is_video
 {
     my( $self, $state, $eprint, $value ) = @_;
@@ -113,6 +115,8 @@ sub run_url_is_video
     return [0, "BOOLEAN"];
 
 }
+
+
 sub run_url_to_embed
 {
     my( $self, $state, $eprint, $value ) = @_;
@@ -165,3 +169,17 @@ sub run_iiif_manifest_enabled {
 	return [0, "BOOLEAN"]
 }
 
+sub run_url_is_audio
+{
+    my( $self, $state, $eprint, $value ) = @_;
+
+    if( ! $eprint->[0]->isa( "EPrints::DataObj::EPrint") )
+    {
+        $self->runtime_error( "has_type() must be called on an eprint object. not : ".$eprint->[0] );
+    }
+
+    my $url = $eprint->[0]->get_value($value->[0]);
+
+    return [1, "BOOLEAN"] if $url =~ m#(http(s)?://(www\.)?)?soundcloud#;
+    return [0, "BOOLEAN"];
+}

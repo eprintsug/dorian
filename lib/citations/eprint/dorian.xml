@@ -16,7 +16,7 @@
         <epc:if test="$item.has_type('video') or $item.url_is_video('official_url')">
             <button class="dorian-bar-item dorian-button tablink" onclick="openTab(event,'Video')" data-panel="Video">Video</button>
         </epc:if>
-        <epc:if test="$item.has_type('audio')">
+        <epc:if test="$item.has_type('audio')  or $item.url_is_audio('official_url')">
             <button class="dorian-bar-item dorian-button tablink" onclick="openTab(event,'Audio')" data-panel="Audio">Audio</button>
         </epc:if>
         <epc:if test="$item.has_docs() and ($item.has_type('image') or $item.has_type('video') or $item.has_type('audio'))">
@@ -76,7 +76,7 @@
 </epc:if>
 
 <!-- AUDIO -->
-<epc:if test="$item.has_type('audio')">
+<epc:if test="$item.has_type('audio') or $item.url_is_audio('official_url') ">
   <epc:set name='audios' expr="$item.get_type('audio')">
   <div id="Audio" class="dorian-container dorian-border dorian-panel" style="display:none">
         <epc:foreach expr="$audios" iterator="audio">
@@ -88,17 +88,20 @@
      		</video>
 	      </div>
         </epc:foreach>
-    <!-- <epc:comment> Maybe do embedding of audio services... maybe sound cloud. Not supported by plyr, but maybe a default soundcloud iframe 
-	<epc:if test="$item.property('official_url') and $item.url_is_audio('official_url')">
-	    <div class="plyr__video-embed" id="player_official_url">
-		<iframe
-			src="{$item.url_to_embed_audio('official_url')}"
-		    allowfullscreen="true"
-		    allowtransparency="true"
-		    allow="autoplay"></iframe>
-	    </div>
+        
+        <epc:if test="$item.property('official_url') and $item.url_is_audio('official_url')">
+            
+            <iframe id="sc-widget" width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/293"></iframe>
+        <script src="https://w.soundcloud.com/player/api.js" type="text/javascript"></script>
+        <script type="text/javascript">
+          (function(){
+            var widgetIframe = document.getElementById('sc-widget'),
+                widget       = SC.Widget(widgetIframe),
+                newSoundUrl = "<epc:print expr= "$item.url_to_embed('official_url')"/>";
+            widget.load(newSoundUrl, {show_artwork: true});
+          }());
+        </script>
 	 </epc:if>
-	</epc:comment> 	-->
   </div>
   </epc:set> 
 </epc:if>
