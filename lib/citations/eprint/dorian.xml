@@ -98,7 +98,7 @@
             var widgetIframe = document.getElementById('sc-widget'),
                 widget       = SC.Widget(widgetIframe),
                 newSoundUrl = "<epc:print expr= "$item.url_to_embed('official_url')"/>";
-            widget.load(newSoundUrl, {show_artwork: true});
+            widget.load(newSoundUrl, {show_artwork: false});
           }());
         </script>
 	 </epc:if>
