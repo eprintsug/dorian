@@ -15,6 +15,14 @@
         </file>
         <file>
           <datasetid>document</datasetid>
+          <filename>static/images/International_Image_Interoperability_Framework_logo.png</filename>
+          <mime_type>image/png</mime_type>
+          <hash>114ccd33df38b8345f8a134f80707c98</hash>
+          <hash_type>MD5</hash_type>
+          <filesize>10494</filesize>
+        </file>
+        <file>
+          <datasetid>document</datasetid>
           <filename>static/javascript/auto/zzz_dorian.js</filename>
           <mime_type>text/x-c</mime_type>
           <hash>f5f319b4ab34b317c37e0cbced53f2b9</hash>
@@ -25,9 +33,9 @@
           <datasetid>document</datasetid>
           <filename>static/style/auto/zz_dorian.css</filename>
           <mime_type>text/x-c</mime_type>
-          <hash>6443f42382fa54c701b330eedbad2ebf</hash>
+          <hash>13fcc9cfb4e8613cfef4a3a5462977e3</hash>
           <hash_type>MD5</hash_type>
-          <filesize>1860</filesize>
+          <filesize>2827</filesize>
         </file>
         <file>
           <datasetid>document</datasetid>
@@ -41,9 +49,9 @@
           <datasetid>document</datasetid>
           <filename>citations/eprint/dorian.xml</filename>
           <mime_type>application/xml</mime_type>
-          <hash>e4d263bcc993ce3eb80d0c08a7c44250</hash>
+          <hash>37cc2d35ee000083b449e1e67b76b8ff</hash>
           <hash_type>MD5</hash_type>
-          <filesize>14037</filesize>
+          <filesize>14044</filesize>
         </file>
         <file>
           <datasetid>document</datasetid>
@@ -60,7 +68,7 @@
       <content>install</content>
     </document>
   </documents>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <creators>
     <item>
       <name>
@@ -70,7 +78,7 @@
       <id>you@email.address</id>
     </item>
   </creators>
-  <datestamp>2019-08-29 11:41:59</datestamp>
+  <datestamp>2019-09-19 07:03:21</datestamp>
   <title>Dorian</title>
   <description>This is the description.</description>
   <requirements>The following modules are required: X, Y, Z</requirements>
