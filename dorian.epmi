@@ -1,41 +1,17 @@
 <?xml version='1.0' encoding='utf-8'?>
-<epm xmlns='http://eprints.org/ep2/data/2.0' id='http://template.ulcc.ac.uk/id/epm/dorian'>
+<epm xmlns='http://eprints.org/ep2/data/2.0' id='http://localhost:8080/id/epm/dorian'>
   <epmid>dorian</epmid>
-  <uri>http://template.ulcc.ac.uk/id/epm/dorian</uri>
+  <uri>http://localhost:8080/id/epm/dorian</uri>
   <documents>
     <document>
       <files>
         <file>
           <datasetid>document</datasetid>
-          <filename>lang/en/phrases/dorian_phrases.xml</filename>
-          <mime_type>application/xml</mime_type>
-          <hash>531642c95be1c1da87499ee6c9c21194</hash>
+          <filename>epm/dorian/cfg/cfg.d/zzz_doriancfg.pl</filename>
+          <mime_type>text/plain</mime_type>
+          <hash>d8fb9c1910f0dc1bd6056e11233a84b3</hash>
           <hash_type>MD5</hash_type>
-          <filesize>1493</filesize>
-        </file>
-        <file>
-          <datasetid>document</datasetid>
-          <filename>static/images/International_Image_Interoperability_Framework_logo.png</filename>
-          <mime_type>image/png</mime_type>
-          <hash>114ccd33df38b8345f8a134f80707c98</hash>
-          <hash_type>MD5</hash_type>
-          <filesize>10494</filesize>
-        </file>
-        <file>
-          <datasetid>document</datasetid>
-          <filename>static/javascript/auto/zzz_dorian.js</filename>
-          <mime_type>text/x-c</mime_type>
-          <hash>f5f319b4ab34b317c37e0cbced53f2b9</hash>
-          <hash_type>MD5</hash_type>
-          <filesize>2681</filesize>
-        </file>
-        <file>
-          <datasetid>document</datasetid>
-          <filename>static/style/auto/zz_dorian.css</filename>
-          <mime_type>text/x-c</mime_type>
-          <hash>13fcc9cfb4e8613cfef4a3a5462977e3</hash>
-          <hash_type>MD5</hash_type>
-          <filesize>2827</filesize>
+          <filesize>618</filesize>
         </file>
         <file>
           <datasetid>document</datasetid>
@@ -55,16 +31,40 @@
         </file>
         <file>
           <datasetid>document</datasetid>
-          <filename>epm/dorian/cfg/cfg.d/zzz_doriancfg.pl</filename>
-          <mime_type>text/plain</mime_type>
-          <hash>d8fb9c1910f0dc1bd6056e11233a84b3</hash>
+          <filename>lang/en/phrases/dorian_phrases.xml</filename>
+          <mime_type>application/xml</mime_type>
+          <hash>531642c95be1c1da87499ee6c9c21194</hash>
           <hash_type>MD5</hash_type>
-          <filesize>618</filesize>
+          <filesize>1493</filesize>
+        </file>
+        <file>
+          <datasetid>document</datasetid>
+          <filename>static/images/International_Image_Interoperability_Framework_logo.png</filename>
+          <mime_type>image/png</mime_type>
+          <hash>114ccd33df38b8345f8a134f80707c98</hash>
+          <hash_type>MD5</hash_type>
+          <filesize>10494</filesize>
+        </file>
+        <file>
+          <datasetid>document</datasetid>
+          <filename>static/javascript/auto/zzz_dorian.js</filename>
+          <mime_type>text/plain</mime_type>
+          <hash>f5f319b4ab34b317c37e0cbced53f2b9</hash>
+          <hash_type>MD5</hash_type>
+          <filesize>2681</filesize>
+        </file>
+        <file>
+          <datasetid>document</datasetid>
+          <filename>static/style/auto/zz_dorian.css</filename>
+          <mime_type>text/plain</mime_type>
+          <hash>13fcc9cfb4e8613cfef4a3a5462977e3</hash>
+          <hash_type>MD5</hash_type>
+          <filesize>2827</filesize>
         </file>
       </files>
       <mime_type>text/plain</mime_type>
       <format>text</format>
-      <main>epm/dorian/cfg/cfg.d/zzz_doriancfg.pl</main>
+      <main>static/style/auto/zz_dorian.css</main>
       <content>install</content>
     </document>
   </documents>
@@ -78,7 +78,7 @@
       <id>you@email.address</id>
     </item>
   </creators>
-  <datestamp>2019-09-19 08:41:20</datestamp>
+  <datestamp>2019-11-05 14:00:26</datestamp>
   <title>Dorian</title>
   <description>This is the description.</description>
   <requirements>The following modules are required: X, Y, Z</requirements>
