@@ -17,9 +17,9 @@
           <datasetid>document</datasetid>
           <filename>cfg.d/zz_dorian.pl</filename>
           <mime_type>text/plain</mime_type>
-          <hash>db344b2cca6ec13a7d4a245151963ca4</hash>
+          <hash>fdd110632693b5b148fd3f7cb3f1b626</hash>
           <hash_type>MD5</hash_type>
-          <filesize>4673</filesize>
+          <filesize>4980</filesize>
         </file>
         <file>
           <datasetid>document</datasetid>
@@ -78,7 +78,7 @@
       <id>you@email.address</id>
     </item>
   </creators>
-  <datestamp>2019-11-05 14:00:26</datestamp>
+  <datestamp>2019-11-11 17:21:40</datestamp>
   <title>Dorian</title>
   <description>This is the description.</description>
   <requirements>The following modules are required: X, Y, Z</requirements>
