@@ -3,13 +3,22 @@ $c->{dorian}->{get_docs_by_type} = sub {
 	my ($repo, $eprint, $type) = @_;
    	my $docs = [];
     	for my $doc ($eprint->get_all_documents){
-            if($doc->value("mime_type") =~ m#^$type/# && !grep $_ eq $doc->value("mime_type"), @{$repo->get_conf("dorian","mime_exceptions")}){
-                	push @{$docs}, $doc;
-        	}
+            push (@{$docs}, $doc) if(is_a_valid_dorian_doc($repo, $doc, $type));
     	}
 	return $docs;
 };
 
+sub is_a_valid_dorian_doc {
+    my ($repo, $doc, $type) = @_;
+    my $is_valid_mimetype = $doc->value("mime_type") =~ m#^$type/#;
+    my $is_not_an_exception = !grep $_ eq $doc->value("mime_type"), 
+                                @{$repo->get_conf("dorian","mime_exceptions")};
+    my $is_public = $doc->is_public;
+    
+    return  $is_valid_mimetype && 
+            $is_not_an_exception && 
+            $is_public;
+}
 
 # calculate image dimensions
 $c->add_trigger( EP_TRIGGER_MEDIA_INFO, sub {
