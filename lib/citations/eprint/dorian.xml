@@ -80,15 +80,13 @@
   <epc:set name='audios' expr="$item.get_type('audio')">
   <div id="Audio" class="dorian-container dorian-border dorian-panel" style="display:none">
         <epc:foreach expr="$audios" iterator="audio">
-          <div class="plyr_container">
-		    <video poster="" id="audio_plyr_{$index}" playsinline="true" controls="true"
-			data-doc-title="{$audio.property('main')}"
-			class="audio">
+          <div class="plyr plyr--full-ui plyr--audio">
+              <audio id="audio_plyr_{$index}" controls="true">
 	     		<source src="{$audio.url()}" type="{$audio.property('mime_type')}" />
-     		</video>
-	      </div>
+     		</audio>
+            </div>
         </epc:foreach>
-    <!-- <epc:comment> Maybe do embedding of audio services... maybe sound cloud. Not supported by plyr, but maybe a default soundcloud iframe 
+    <!-- <epc:comment> TEST Maybe do embedding of audio services... maybe sound cloud. Not supported by plyr, but maybe a default soundcloud iframe 
 	<epc:if test="$item.property('official_url') and $item.url_is_audio('official_url')">
 	    <div class="plyr__video-embed" id="player_official_url">
 		<iframe
@@ -304,11 +302,11 @@ jQuery(function() {
     	});
    	//check a url that we think is an embedable videos  (no need for plyr+_config for 3rd party vids)
     	if(jQuery('#player_official_url').length>0){
-		new Plyr('#player_official_url');
+		    new Plyr('#player_official_url');
     	}
 
-    	jQuery('.audio').each( function(ind) {
-		init_plyr(this,ind);
+    	jQuery('audio').each( function(ind) {
+		    init_plyr(this,ind);
     	});
 	
 	function init_plyr(el, index){
