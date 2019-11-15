@@ -1,10 +1,8 @@
 <?xml version="1.0" ?>
 
-<!-- 
-	Full "abstract page" (or splash page or summary page, depending on your jargon) for an eprint. 
--->
-
-<cite:citation xmlns="http://www.w3.org/1999/xhtml" xmlns:epc="http://eprints.org/ep3/control" xmlns:cite="http://eprints.org/ep3/citation" >
+<cite:citation xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:epc="http://eprints.org/ep3/control" 
+    xmlns:cite="http://eprints.org/ep3/citation" >
 
 <!-- Photoswipe container for slide show-->
 <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">

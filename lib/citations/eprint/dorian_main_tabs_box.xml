@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+
+<cite:citation xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:epc="http://eprints.org/ep3/control" 
+    xmlns:cite="http://eprints.org/ep3/citation" >
+
+<div class="dorian-main">
+    <!-- TAB CONTROLS: aka the buttons at the top of the media box -->
+    <epc:print expr="$item.citation('dorian_tab_controls')"/>
+
+    <!-- FILE SECTIONS BY MIME TYPE --> 
+    <epc:print expr="$item.citation('dorian_images')"/>
+    <epc:print expr="$item.citation('dorian_videos')"/>
+    <epc:print expr="$item.citation('dorian_audios')"/>
+
+    <!-- DOWNLOADS AKA everything else -->
+    <epc:print expr="$item.citation('dorian_downloads')"/>
+
+    <!-- METADATA SECTION -->
+    <epc:print expr="$item.citation('dorian_metadata_section')"/>
+</div>
+
+</cite:citation>

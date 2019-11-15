@@ -1,6 +1,8 @@
 <?xml version="1.0" ?>
 
-<cite:citation xmlns="http://www.w3.org/1999/xhtml" xmlns:epc="http://eprints.org/ep3/control" xmlns:cite="http://eprints.org/ep3/citation" >
+<cite:citation xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:epc="http://eprints.org/ep3/control" 
+    xmlns:cite="http://eprints.org/ep3/citation" >
 
   <epc:set name='images' expr="$item.get_type('image')">
   <div id="Images" class="dorian-container dorian-border dorian-panel">
