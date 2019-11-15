@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+
+<!-- 
+	Full "abstract page" (or splash page or summary page, depending on your jargon) for an eprint. 
+-->
+
+<cite:citation xmlns="http://www.w3.org/1999/xhtml" xmlns:epc="http://eprints.org/ep3/control" xmlns:cite="http://eprints.org/ep3/citation" >
+
+    <!-- if we have docs either multimedia or additional to mm we have a dowloads panel -->
+  <div id="Downloads" class="dorian-container dorian-border dorian-panel" style="display:none">
+     <div class="downloads_container">
+      <epc:set name='docs' expr='$item.documents()'>
+        <epc:if test="length($docs) = 0">
+          <epc:phrase ref="page:nofulltext" />
+          <epc:if test="$item.contact_email().is_set() and eprint_status = 'archive'">
+            (<a href="{$config{http_cgiurl}}/request_doc?eprintid={eprintid}"><epc:phrase ref="request:button" /></a>)
+          </epc:if>
+        </epc:if>
+      
+        <epc:if test="length($docs) gt 0">
+          <epc:phrase ref="page:fulltext" />
+		<div class="downloads_grid">
+		 <epc:foreach expr="$docs" iterator="doc">
+		  <a href="{$doc.url()}">
+		    <figure>
+<!--		      <epc:print expr="$doc.icon('HoverPreview','noNewWindow')}" /> -->
+		      <epc:print expr="$doc.icon()" />
+		      <figcaption>
+			  <epc:print expr="$doc.citation('default')" /><br />
+			  <a href="{$doc.url()}" class="ep_document_link"><epc:phrase ref="summary_page:download"/> (<epc:print expr="$doc.doc_size().human_filesize()" />)</a>
+			  <epc:if test="!$doc.is_public() and $item.contact_email().is_set() and eprint_status = 'archive'">
+			    | <a href="{$config{http_cgiurl}}/request_doc?docid={$doc{docid}"><epc:phrase ref="request:button" /></a>
+			  </epc:if>
+		      </figcaption>
+		    </figure>
+		  </a>
+		 </epc:foreach>
+         	<epc:if test="iiif_manifest_enabled()">
+		  <a href="{$config{http_cgiurl}}/export/eprint/{$item.property('eprintid')}/IIIFManifest/nuatest-eprint-{$item.property('eprintid')}.js">
+		   <figure>
+	  	     <img src="{$config{rel_path}}/images/International_Image_Interoperability_Framework_logo.png" width="68px"/>
+		     <figcaption>
+			Export IIIF Manifest
+			<br/>
+			<a href="https://iiif.io/about/">What is IIIF?</a>
+		     </figcaption>
+		   </figure>
+	      	 </a>
+         	</epc:if>
+		</div>
+        </epc:if>
+      </epc:set>
+    </div>
+  </div>
+
+</cite:citation>
