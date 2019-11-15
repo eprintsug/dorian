@@ -23,67 +23,19 @@
         </file>
         <file>
           <datasetid>document</datasetid>
-          <filename>citations/eprint/dorian_main_tabs_box.xml</filename>
+          <filename>citations/eprint/dorian.xml</filename>
           <mime_type>application/xml</mime_type>
-          <hash>bf29a622c1cf2d74f7c43d5188efaebc</hash>
+          <hash>ca86472e6cb4b32a7fe45e82634790a9</hash>
           <hash_type>MD5</hash_type>
-          <filesize>771</filesize>
+          <filesize>320</filesize>
         </file>
         <file>
           <datasetid>document</datasetid>
-          <filename>citations/eprint/dorian_downloads_section.xml</filename>
+          <filename>citations/eprint/dorian_audios.xml</filename>
           <mime_type>application/xml</mime_type>
-          <hash>1da29d6beb5344851ce2413238333f6b</hash>
+          <hash>ee7d4dbee4e239cb8f173cd0aec68c48</hash>
           <hash_type>MD5</hash_type>
-          <filesize>2235</filesize>
-        </file>
-        <file>
-          <datasetid>document</datasetid>
-          <filename>citations/eprint/dorian_images.xml</filename>
-          <mime_type>application/xml</mime_type>
-          <hash>5cf503c438cf2042a6b9aa7cfdf9dfc3</hash>
-          <hash_type>MD5</hash_type>
-          <filesize>319</filesize>
-        </file>
-        <file>
-          <datasetid>document</datasetid>
-          <filename>citations/eprint/dorian_plyr_player.xml</filename>
-          <mime_type>application/xml</mime_type>
-          <hash>6ac4477c3f328f26821ff374ae63e6f6</hash>
-          <hash_type>MD5</hash_type>
-          <filesize>1295</filesize>
-        </file>
-        <file>
-          <datasetid>document</datasetid>
-          <filename>citations/eprint/dorian_tab_controls.xml</filename>
-          <mime_type>application/xml</mime_type>
-          <hash>e22f38bc1be3eac211e8a3089e69eca0</hash>
-          <hash_type>MD5</hash_type>
-          <filesize>1454</filesize>
-        </file>
-        <file>
-          <datasetid>document</datasetid>
-          <filename>citations/eprint/dorian_metadata_section.xml</filename>
-          <mime_type>application/xml</mime_type>
-          <hash>dcc49e96785dff7f2265f264725754e7</hash>
-          <hash_type>MD5</hash_type>
-          <filesize>3744</filesize>
-        </file>
-        <file>
-          <datasetid>document</datasetid>
-          <filename>citations/eprint/dorian_videos.xml</filename>
-          <mime_type>application/xml</mime_type>
-          <hash>0d03bc4d901eaa058dcf08b4e1ed7d69</hash>
-          <hash_type>MD5</hash_type>
-          <filesize>370</filesize>
-        </file>
-        <file>
-          <datasetid>document</datasetid>
-          <filename>citations/eprint/dorian_audio_players_section.xml</filename>
-          <mime_type>application/xml</mime_type>
-          <hash>77b6ae6c639d86469745e4258460109c</hash>
-          <hash_type>MD5</hash_type>
-          <filesize>1355</filesize>
+          <filesize>325</filesize>
         </file>
         <file>
           <datasetid>document</datasetid>
@@ -103,6 +55,22 @@
         </file>
         <file>
           <datasetid>document</datasetid>
+          <filename>citations/eprint/dorian_downloads_section.xml</filename>
+          <mime_type>application/xml</mime_type>
+          <hash>1da29d6beb5344851ce2413238333f6b</hash>
+          <hash_type>MD5</hash_type>
+          <filesize>2235</filesize>
+        </file>
+        <file>
+          <datasetid>document</datasetid>
+          <filename>citations/eprint/dorian_images.xml</filename>
+          <mime_type>application/xml</mime_type>
+          <hash>5cf503c438cf2042a6b9aa7cfdf9dfc3</hash>
+          <hash_type>MD5</hash_type>
+          <filesize>319</filesize>
+        </file>
+        <file>
+          <datasetid>document</datasetid>
           <filename>citations/eprint/dorian_images_section.xml</filename>
           <mime_type>application/xml</mime_type>
           <hash>3238cef3b8d6df9c72bf6ac2cdfab110</hash>
@@ -111,19 +79,19 @@
         </file>
         <file>
           <datasetid>document</datasetid>
-          <filename>citations/eprint/dorian.xml</filename>
+          <filename>citations/eprint/dorian_main_tabs_box.xml</filename>
           <mime_type>application/xml</mime_type>
-          <hash>ca86472e6cb4b32a7fe45e82634790a9</hash>
+          <hash>bf29a622c1cf2d74f7c43d5188efaebc</hash>
           <hash_type>MD5</hash_type>
-          <filesize>320</filesize>
+          <filesize>771</filesize>
         </file>
         <file>
           <datasetid>document</datasetid>
-          <filename>citations/eprint/dorian_audios.xml</filename>
+          <filename>citations/eprint/dorian_metadata_section.xml</filename>
           <mime_type>application/xml</mime_type>
-          <hash>ee7d4dbee4e239cb8f173cd0aec68c48</hash>
+          <hash>dcc49e96785dff7f2265f264725754e7</hash>
           <hash_type>MD5</hash_type>
-          <filesize>325</filesize>
+          <filesize>3744</filesize>
         </file>
         <file>
           <datasetid>document</datasetid>
@@ -135,11 +103,43 @@
         </file>
         <file>
           <datasetid>document</datasetid>
+          <filename>citations/eprint/dorian_plyr_player.xml</filename>
+          <mime_type>application/xml</mime_type>
+          <hash>6ac4477c3f328f26821ff374ae63e6f6</hash>
+          <hash_type>MD5</hash_type>
+          <filesize>1295</filesize>
+        </file>
+        <file>
+          <datasetid>document</datasetid>
+          <filename>citations/eprint/dorian_tab_controls.xml</filename>
+          <mime_type>application/xml</mime_type>
+          <hash>e22f38bc1be3eac211e8a3089e69eca0</hash>
+          <hash_type>MD5</hash_type>
+          <filesize>1454</filesize>
+        </file>
+        <file>
+          <datasetid>document</datasetid>
           <filename>citations/eprint/dorian_video_players_section.xml</filename>
           <mime_type>application/xml</mime_type>
           <hash>5f33d7a9b2f7138d09e179efb9624fc7</hash>
           <hash_type>MD5</hash_type>
           <filesize>1415</filesize>
+        </file>
+        <file>
+          <datasetid>document</datasetid>
+          <filename>citations/eprint/dorian_videos.xml</filename>
+          <mime_type>application/xml</mime_type>
+          <hash>0d03bc4d901eaa058dcf08b4e1ed7d69</hash>
+          <hash_type>MD5</hash_type>
+          <filesize>370</filesize>
+        </file>
+        <file>
+          <datasetid>document</datasetid>
+          <filename>citations/eprint/dorian_audio_players_section.xml</filename>
+          <mime_type>application/xml</mime_type>
+          <hash>98ab656c241b6df26be56157c60ae68a</hash>
+          <hash_type>MD5</hash_type>
+          <filesize>861</filesize>
         </file>
         <file>
           <datasetid>document</datasetid>
@@ -190,7 +190,7 @@
       <id>you@email.address</id>
     </item>
   </creators>
-  <datestamp>2019-11-15 12:49:06</datestamp>
+  <datestamp>2019-11-15 16:23:36</datestamp>
   <title>Dorian</title>
   <description>This is the description.</description>
   <requirements>The following modules are required: X, Y, Z</requirements>

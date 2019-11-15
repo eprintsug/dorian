@@ -9,7 +9,7 @@
         <epc:foreach expr="$audios" iterator="audio">
             <div class="dorian_audio_file_name">
                 <br/>
-                <epc:print expr="$index"/> - <print expr="$audio.property('main')"/>
+                <epc:print expr="$index + 1"/> - <print expr="$audio.property('main')"/>
                 <br/>
             </div>
           <div class="plyr_container">
@@ -18,17 +18,6 @@
      		</audio>
             </div>
         </epc:foreach>
-    <!-- <epc:comment> TEST Maybe do embedding of audio services... maybe sound cloud. Not supported by plyr, but maybe a default soundcloud iframe 
-	<epc:if test="$item.property('official_url') and $item.url_is_audio('official_url')">
-	    <div class="plyr__video-embed" id="player_official_url">
-		<iframe
-			src="{$item.url_to_embed_audio('official_url')}"
-		    allowfullscreen="true"
-		    allowtransparency="true"
-		    allow="autoplay"></iframe>
-	    </div>
-	 </epc:if>
-	</epc:comment> 	-->
   </div>
   </epc:set> 
 
