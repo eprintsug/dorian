@@ -29,19 +29,7 @@
 
 <!-- IMAGES --> 
 <epc:if test="$item.has_type('image')">
-  <epc:set name='images' expr="$item.get_type('image')">
-  <div id="Images" class="dorian-container dorian-border dorian-panel">
-    <div id="image_container" class="free-wall picture">
-        <epc:foreach expr="$images" iterator="image">
-          <div class="item brick">
-		  <a href="{$image.url()}" itemprop="contentUrl" data-size="{$image.property('media_width')}x{$image.property('media_height')}">
-			<img src="{$image.thumbnail_url('preview')}" itemprop="thumbnail" alt="Image description" data-index="{$index}" />
-              </a>
-          </div>
-        </epc:foreach>
-    </div>
-  </div>
-  </epc:set>
+    <epc:print expr="$item.citation('dorian_images_section')"/>
 </epc:if>
 
 <!-- VIDEO SECTION -->
