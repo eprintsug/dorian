@@ -80,7 +80,12 @@
   <epc:set name='audios' expr="$item.get_type('audio')">
   <div id="Audio" class="dorian-container dorian-border dorian-panel" style="display:none">
         <epc:foreach expr="$audios" iterator="audio">
-          <div class="plyr plyr--full-ui plyr--audio">
+            <div class="dorian_audio_file_name">
+                <br/>
+                <epc:print expr="$index"/> - <print expr="$audio.property('main')"/>
+                <br/>
+            </div>
+          <div class="plyr_container">
               <audio id="audio_plyr_{$index}" controls="true">
 	     		<source src="{$audio.url()}" type="{$audio.property('mime_type')}" />
      		</audio>
