@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+
+<cite:citation xmlns="http://www.w3.org/1999/xhtml" xmlns:epc="http://eprints.org/ep3/control" xmlns:cite="http://eprints.org/ep3/citation" >
+
+<script type="text/javascript">
+//<![CDATA[
+const VE_CONFIG = {};
+//]]>
+VE_CONFIG.use_images_as_posters = false;
+<epc:if test="$config{dorian}{use_images_as_posters} = 'TRUE'">
+VE_CONFIG.use_images_as_posters = true;
+</epc:if>
+
+//<![CDATA[
+
+jQuery(function() {
+
+	jQuery('.video').each( function(ind) {
+		init_plyr(this, ind);
+    	});
+   	//check a url that we think is an embedable videos  (no need for plyr+_config for 3rd party vids)
+    	if(jQuery('#player_official_url').length>0){
+		    new Plyr('#player_official_url');
+    	}
+
+    	jQuery('audio').each( function(ind) {
+		    init_plyr(this,ind);
+    	});
+	
+	function init_plyr(el, index){
+		const plyr_config = {};
+		plyr_config.title = jQuery(el).data("doc-title");
+		//use the image with same index for poster
+		if( VE_CONFIG.use_images_as_posters && jQuery('.picture a img').length > 0 &&  jQuery('.picture a img').eq(index) !== undefined){
+			jQuery(el).attr("poster", jQuery('.picture a img').eq(index).attr("src"));
+		}
+		//		console.log("plyr_config: ",plyr_config);
+		new Plyr('#'+jQuery(el).attr("id"), plyr_config );	
+	}
+});
+//]]>
+</script>
+
+</cite:citation>
