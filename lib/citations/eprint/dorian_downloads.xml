@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+
+<cite:citation xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:epc="http://eprints.org/ep3/control" 
+    xmlns:cite="http://eprints.org/ep3/citation" >
+
+    <epc:if test="  $item.has_docs() and 
+                    ($item.has_type('image') or 
+                        $item.has_type('video') or 
+                        $item.has_type('audio'))">
+        <epc:print expr="$item.citation('dorian_downloads_section')"/>
+    </epc:if>
+
+</cite:citation>

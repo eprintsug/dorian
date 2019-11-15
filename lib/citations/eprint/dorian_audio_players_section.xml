@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+
+<cite:citation xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:epc="http://eprints.org/ep3/control" 
+    xmlns:cite="http://eprints.org/ep3/citation" >
+
+  <epc:set name='audios' expr="$item.get_type('audio')">
+  <div id="Audio" class="dorian-container dorian-border dorian-panel" style="display:none">
+        <epc:foreach expr="$audios" iterator="audio">
+            <div class="dorian_audio_file_name">
+                <br/>
+                <epc:print expr="$index"/> - <print expr="$audio.property('main')"/>
+                <br/>
+            </div>
+          <div class="plyr_container">
+              <audio id="audio_plyr_{$index}" controls="true">
+	     		<source src="{$audio.url()}" type="{$audio.property('mime_type')}" />
+     		</audio>
+            </div>
+        </epc:foreach>
+    <!-- <epc:comment> TEST Maybe do embedding of audio services... maybe sound cloud. Not supported by plyr, but maybe a default soundcloud iframe 
+	<epc:if test="$item.property('official_url') and $item.url_is_audio('official_url')">
+	    <div class="plyr__video-embed" id="player_official_url">
+		<iframe
+			src="{$item.url_to_embed_audio('official_url')}"
+		    allowfullscreen="true"
+		    allowtransparency="true"
+		    allow="autoplay"></iframe>
+	    </div>
+	 </epc:if>
+	</epc:comment> 	-->
+  </div>
+  </epc:set> 
+
+
+</cite:citation>

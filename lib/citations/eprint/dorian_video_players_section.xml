@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+
+<!-- 
+	Full "abstract page" (or splash page or summary page, depending on your jargon) for an eprint. 
+-->
+
+<cite:citation xmlns="http://www.w3.org/1999/xhtml" xmlns:epc="http://eprints.org/ep3/control" xmlns:cite="http://eprints.org/ep3/citation" >
+
+  <epc:set name='videos' expr="$item.get_type('video')">
+     <div id="Video" class="dorian-container dorian-border dorian-panel" style="display:none">
+	<!-- LOOP THROUGH ITEM VIDEO FILES and youtube/vimeo urls -->
+        <epc:foreach expr="$videos" iterator="video">
+          <div class="plyr_container">
+		<video id="plyr_{$index}" playsinline="true" controls="true" 
+			data-doc-title="{$video.property('main')}"
+			class="video">
+	     <source src="{$video.url()}" type="{$video.property('mime_type')}" />
+	       <!-- Captions are optional -->
+	       <!-- <track kind="captions" label="English captions" src="/path/to/captions.vtt" srclang="en" default />-->
+              </video>
+	  </div>
+        </epc:foreach>
+	<epc:if test="$item.property('official_url') and $item.url_is_video('official_url')">
+          <div class="plyr_container">
+	    <div class="plyr__video-embed" id="player_official_url">
+		<iframe
+			src="{$item.url_to_embed('official_url')}"
+		    allowfullscreen="true"
+		    allowtransparency="true"
+		    allow="autoplay"></iframe>
+	     </div>
+	   </div>
+	 </epc:if>
+     </div>
+  </epc:set> 
+
+</cite:citation>

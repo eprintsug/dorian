@@ -3,8 +3,7 @@
 <cite:citation xmlns="http://www.w3.org/1999/xhtml" 
     xmlns:epc="http://eprints.org/ep3/control" 
     xmlns:cite="http://eprints.org/ep3/citation" >
-
-    <epc:print expr="$item.citation('dorian_main_tabs_box')"/>
-    <epc:print expr="$item.citation('dorian_dependencies')"/>
-
+    <epc:if test="$item.has_type('image')">
+        <epc:print expr="$item.citation('dorian_images_section')"/>
+    </epc:if>
 </cite:citation>
