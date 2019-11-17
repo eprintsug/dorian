@@ -8,22 +8,16 @@
 	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 
 	<!--freewall displays the image thumbnails in various pretty ways -->
-    <!--	<script src="https://www.ruan-jian.com/ajax/libs/freewall/1.0.5/freewall.min.js"></script>-->
-    <script src="https://raw.githubusercontent.com/kombai/freewall/master/freewall.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/freewall/1.0.5/freewall.min.js"></script>
 
 	<!-- Photoswipe handles the slide show -->
-<!--	<link href="https://www.ruan-jian.com/ajax/libs/photoswipe/4.1.3/photoswipe.min.css" rel="stylesheet"/> -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe.min.css" rel="stylesheet"/>
 
-    <!--	<link href="https://www.ruan-jian.com/ajax/libs/photoswipe/4.1.3/default-skin/default-skin.min.css" rel="stylesheet"/>-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/default-skin/default-skin.min.css" rel="stylesheet"/>
 <!-- Core JS file -->
-<!--	<script src="https://www.ruan-jian.com/ajax/libs/photoswipe/4.1.3/photoswipe.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe.min.js"></script>
 
 	<!-- UI JS file -->
-    <!--	<script src="https://www.ruan-jian.com/ajax/libs/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
 
 	    
