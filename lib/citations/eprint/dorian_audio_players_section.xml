@@ -27,7 +27,7 @@
                             type="text/javascript"></script>
                         <script type="text/javascript">
                             //<![CDATA[
-                            soundcloud_url = "https://w.soundcloud.com/player/?url=";
+                            let soundcloud_url = "https://w.soundcloud.com/player/?url=";
                             //]]>
                             soundcloud_url += "<epc:print expr= "$item.url_to_embed('official_url')"/>";
                             //<![CDATA[
