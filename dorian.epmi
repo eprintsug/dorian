@@ -17,9 +17,9 @@
           <datasetid>document</datasetid>
           <filename>cfg.d/zz_dorian.pl</filename>
           <mime_type>text/plain</mime_type>
-          <hash>fdd110632693b5b148fd3f7cb3f1b626</hash>
+          <hash>331bb3817d3b1a65bcf4837721ec51e1</hash>
           <hash_type>MD5</hash_type>
-          <filesize>4980</filesize>
+          <filesize>5383</filesize>
         </file>
         <file>
           <datasetid>document</datasetid>
@@ -28,14 +28,6 @@
           <hash>ca86472e6cb4b32a7fe45e82634790a9</hash>
           <hash_type>MD5</hash_type>
           <filesize>320</filesize>
-        </file>
-        <file>
-          <datasetid>document</datasetid>
-          <filename>citations/eprint/dorian_audios.xml</filename>
-          <mime_type>application/xml</mime_type>
-          <hash>ee7d4dbee4e239cb8f173cd0aec68c48</hash>
-          <hash_type>MD5</hash_type>
-          <filesize>325</filesize>
         </file>
         <file>
           <datasetid>document</datasetid>
@@ -111,14 +103,6 @@
         </file>
         <file>
           <datasetid>document</datasetid>
-          <filename>citations/eprint/dorian_tab_controls.xml</filename>
-          <mime_type>application/xml</mime_type>
-          <hash>e22f38bc1be3eac211e8a3089e69eca0</hash>
-          <hash_type>MD5</hash_type>
-          <filesize>1454</filesize>
-        </file>
-        <file>
-          <datasetid>document</datasetid>
           <filename>citations/eprint/dorian_video_players_section.xml</filename>
           <mime_type>application/xml</mime_type>
           <hash>5f33d7a9b2f7138d09e179efb9624fc7</hash>
@@ -135,11 +119,27 @@
         </file>
         <file>
           <datasetid>document</datasetid>
+          <filename>citations/eprint/dorian_audios.xml</filename>
+          <mime_type>application/xml</mime_type>
+          <hash>4ed7269d972d0d55a781b7ab3654a13c</hash>
+          <hash_type>MD5</hash_type>
+          <filesize>363</filesize>
+        </file>
+        <file>
+          <datasetid>document</datasetid>
+          <filename>citations/eprint/dorian_tab_controls.xml</filename>
+          <mime_type>application/xml</mime_type>
+          <hash>7cf7cfcb4f230ee3da2c078dbcd3a266</hash>
+          <hash_type>MD5</hash_type>
+          <filesize>1492</filesize>
+        </file>
+        <file>
+          <datasetid>document</datasetid>
           <filename>citations/eprint/dorian_audio_players_section.xml</filename>
           <mime_type>application/xml</mime_type>
-          <hash>98ab656c241b6df26be56157c60ae68a</hash>
+          <hash>821156af661f47c62dbe6685bba892df</hash>
           <hash_type>MD5</hash_type>
-          <filesize>861</filesize>
+          <filesize>1994</filesize>
         </file>
         <file>
           <datasetid>document</datasetid>
@@ -190,7 +190,7 @@
       <id>you@email.address</id>
     </item>
   </creators>
-  <datestamp>2019-11-15 16:23:36</datestamp>
+  <datestamp>2019-11-18 15:27:40</datestamp>
   <title>Dorian</title>
   <description>This is the description.</description>
   <requirements>The following modules are required: X, Y, Z</requirements>
