@@ -11,7 +11,7 @@
     <epc:if test="$item.has_type('video') or $item.url_is_video('official_url')">
         <button class="dorian-bar-item dorian-button tablink" onclick="openTab(event,'Video')" data-panel="Video">Video</button>
     </epc:if>
-    <epc:if test="$item.has_type('audio')">
+    <epc:if test="$item.has_type('audio') or $item.url_is_audio('official_url')">
         <button class="dorian-bar-item dorian-button tablink" onclick="openTab(event,'Audio')" data-panel="Audio">Audio</button>
     </epc:if>
     <epc:if test="$item.has_docs() and ($item.has_type('image') or $item.has_type('video') or $item.has_type('audio'))">
