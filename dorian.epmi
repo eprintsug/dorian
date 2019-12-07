@@ -81,9 +81,9 @@
           <datasetid>document</datasetid>
           <filename>citations/eprint/dorian_tab_controls.xml</filename>
           <mime_type>application/xml</mime_type>
-          <hash>a2be1b4c3020e328dfdc76e5cb945811</hash>
+          <hash>b06971c3ddf0f33548ec04a57945bab1</hash>
           <hash_type>MD5</hash_type>
-          <filesize>1531</filesize>
+          <filesize>1715</filesize>
         </file>
         <file>
           <datasetid>document</datasetid>
@@ -180,7 +180,7 @@
       <content>install</content>
     </document>
   </documents>
-  <version>1.0.2</version>
+  <version>1.0.3</version>
   <creators>
     <item>
       <name>
@@ -190,7 +190,7 @@
       <id>you@email.address</id>
     </item>
   </creators>
-  <datestamp>2019-11-17 09:15:36</datestamp>
+  <datestamp>2019-12-07 18:54:57</datestamp>
   <title>Dorian</title>
   <description>This is the description.</description>
   <requirements>The following modules are required: X, Y, Z</requirements>
