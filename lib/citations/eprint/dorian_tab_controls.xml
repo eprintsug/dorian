@@ -1,10 +1,11 @@
 <?xml version="1.0" ?>
 
-<cite:citation xmlns="http://www.w3.org/1999/xhtml" 
-    xmlns:epc="http://eprints.org/ep3/control" 
+<cite:citation xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:epc="http://eprints.org/ep3/control"
     xmlns:cite="http://eprints.org/ep3/citation" >
 
-  <div class="dorian-bar ep-bg">
+  <epc:if test="$item.has_type('image') or $item.has_type('video') or $item.has_type('audio') or $item.url_is_video('official_url') or $item.url_is_audio('official_url')">
+   <div class="dorian-bar ep-bg">
     <epc:if test="$item.has_type('image')">
         <button class="dorian-bar-item dorian-button tablink ep-fg" onclick="openTab(event,'Images')" data-panel="Images">Images</button>
     </epc:if>
@@ -17,9 +18,10 @@
     <epc:if test="$item.has_docs() and ($item.has_type('image') or $item.has_type('video') or $item.has_type('audio'))">
         <button class="dorian-bar-item dorian-button tablink" onclick="openTab(event,'Downloads')" data-panel="Downloads">Downloads</button>
     </epc:if>
-    <epc:if test="($item.has_docs() and ($item.has_type('image') or $item.has_type('video') or $item.has_type('audio'))) or $item.url_is_video('official_url') or $item.url_is_audio('official_url') )">
+    <epc:if test="($item.has_docs() and ($item.has_type('image') or $item.has_type('video') or $item.has_type('audio'))) or $item.url_is_video('official_url') or $item.url_is_audio('official_url')">
         <button id="Metadata-button" class="dorian-bar-item dorian-button tablink" onclick="openTab(event,'Metadata')" data-panel="Metadata">Metadata</button>
     </epc:if>
-</div>
+   </div>
+  </epc:if>
 
 </cite:citation>
