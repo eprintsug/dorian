@@ -81,9 +81,9 @@
           <datasetid>document</datasetid>
           <filename>citations/eprint/dorian_tab_controls.xml</filename>
           <mime_type>application/xml</mime_type>
-          <hash>b06971c3ddf0f33548ec04a57945bab1</hash>
+          <hash>4f4ffc5d5f464c3736b78e0a9f196c14</hash>
           <hash_type>MD5</hash_type>
-          <filesize>1715</filesize>
+          <filesize>1747</filesize>
         </file>
         <file>
           <datasetid>document</datasetid>
@@ -121,9 +121,9 @@
           <datasetid>document</datasetid>
           <filename>citations/eprint/dorian_video_players_section.xml</filename>
           <mime_type>application/xml</mime_type>
-          <hash>5f33d7a9b2f7138d09e179efb9624fc7</hash>
+          <hash>6f81792ab05feb37a2b6b5ecd00c8fb3</hash>
           <hash_type>MD5</hash_type>
-          <filesize>1415</filesize>
+          <filesize>1864</filesize>
         </file>
         <file>
           <datasetid>document</datasetid>
@@ -137,9 +137,9 @@
           <datasetid>document</datasetid>
           <filename>citations/eprint/dorian_videos.xml</filename>
           <mime_type>application/xml</mime_type>
-          <hash>0d03bc4d901eaa058dcf08b4e1ed7d69</hash>
+          <hash>7615d9471417d044f5dfbe2ada8d54fe</hash>
           <hash_type>MD5</hash_type>
-          <filesize>370</filesize>
+          <filesize>402</filesize>
         </file>
         <file>
           <datasetid>document</datasetid>
@@ -180,7 +180,7 @@
       <content>install</content>
     </document>
   </documents>
-  <version>1.0.3</version>
+  <version>1.0.4</version>
   <creators>
     <item>
       <name>
@@ -190,7 +190,7 @@
       <id>you@email.address</id>
     </item>
   </creators>
-  <datestamp>2019-12-07 18:54:57</datestamp>
+  <datestamp>2020-04-02 18:36:49</datestamp>
   <title>Dorian</title>
   <description>This is the description.</description>
   <requirements>The following modules are required: X, Y, Z</requirements>
