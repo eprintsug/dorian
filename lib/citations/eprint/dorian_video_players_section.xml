@@ -21,9 +21,9 @@
 	  </div>
         </epc:foreach>
 	<epc:if test="$item.property('official_url') and $item.url_is_video('official_url')">
-          <div class="plyr_container">
-	    <div class="plyr__video-embed" id="player_official_url">
-		<iframe
+      <div class="plyr_container">
+ 	    <div class="plyr__video-embed" id="player_official_url">
+          <iframe
 			src="{$item.url_to_embed('official_url')}"
 		    allowfullscreen="true"
 		    allowtransparency="true"
@@ -31,6 +31,17 @@
 	     </div>
 	   </div>
 	 </epc:if>
+     <epc:if test="$item.property('source') and $item.url_is_video('source')">
+         <div class="plyr_container">
+           <div class="plyr__video-embed" id="player_official_url">
+               <iframe
+                   src="{$item.url_to_embed('source')}"
+                   allowfullscreen="true"
+                   allowtransparency="true"
+                   allow="autoplay"></iframe>
+          </div>
+        </div>
+      </epc:if>
      </div>
   </epc:set> 
 

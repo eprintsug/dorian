@@ -9,7 +9,7 @@
     <epc:if test="$item.has_type('image')">
         <button class="dorian-bar-item dorian-button tablink ep-fg" onclick="openTab(event,'Images')" data-panel="Images">Images</button>
     </epc:if>
-    <epc:if test="$item.has_type('video') or $item.url_is_video('official_url')">
+    <epc:if test="$item.has_type('video') or $item.url_is_video('official_url') or $item.url_is_video('source')">
         <button class="dorian-bar-item dorian-button tablink" onclick="openTab(event,'Video')" data-panel="Video">Video</button>
     </epc:if>
     <epc:if test="$item.has_type('audio') or $item.url_is_audio('official_url')">
