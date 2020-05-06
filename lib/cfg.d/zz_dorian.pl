@@ -115,10 +115,36 @@ sub run_url_is_video
         $self->runtime_error( "has_type() must be called on an eprint object. not : ".$eprint->[0] );
     }
 
-    my $url = $eprint->[0]->get_value($value->[0]);
+    my $field_name = $value->[0];
 
-    return [1, "BOOLEAN"] if $url =~ m#http(s)?://(www\.)?youtube#;
-    return [1, "BOOLEAN"] if $url =~ m#http(s)?://(www\.)?vimeo#;
+    # get the url
+    my $url = $eprint->[0]->get_value( $value->[0] );
+
+    # if this is a 'source' field value and we already have the value in the 'official_url' field, don't show it again
+    if( $field_name eq "source" )
+    {
+        if( defined $url && $eprint->[0]->is_set( "official_url" ) && $eprint->[0]->get_value( "official_url" ) eq $url )
+        {
+            return [0, "BOOLEAN"];
+        }
+    }
+
+    # if this url is represented by a document (i.e. it's a downloaded youtube video) don't show it again
+    foreach my $doc ($eprint->[0]->get_all_documents)
+    {
+        foreach my $rel (@{$doc->value( "relation" )})
+        {
+            if( $rel->{type} eq EPrints::Utils::make_relation( "isYoutubeVideo" ) && 
+                ( $url eq $rel->{uri} ) )
+            {
+                # we already have this url as an upload, so we don't need to display it again
+                return [0, "BOOLEAN"];
+            }
+        }
+    }
+
+    return [1, "BOOLEAN"] if defined $url && $url =~ m#http(s)?://(www\.)?youtube#;
+    return [1, "BOOLEAN"] if defined $url && $url =~ m#http(s)?://(www\.)?vimeo#;
     return [0, "BOOLEAN"];
 
 }
@@ -166,7 +192,7 @@ sub run_iiif_manifest_enabled {
 
 	my( $self, $state, $eprint, $arg ) = @_;
 
-    	my $repo = $state->{session}->get_repository;
+	my $repo = $state->{session}->get_repository;
 	my $iiif_disable = $repo->get_conf('plugins','Export::IIIFManifest','params','disable');
 	print STDERR "iiif diable value: $iiif_disable\n";
 	return [1, "BOOLEAN"] if(defined $iiif_disable && $iiif_disable == 0) ;
@@ -185,4 +211,23 @@ sub run_url_is_audio {
     my $url = $eprint->[0]->get_value($value->[0]);
     return [1, "BOOLEAN"] if $url =~ m#(http(s)?://(www\.)?)?soundcloud#;
     return [0, "BOOLEAN"];
+}
+
+# pass a URL value from the relative_url field
+sub run_relative_url_is_audio {
+	my( $self, $state, $eprint, $value ) = @_;
+	if( !$eprint->[0]->isa( "EPrints::DataObj::EPrint" ) )
+	{
+		$self->runtime_error( "has_type() must be called on an eprint object. not : ".$eprint->[0] );
+	}
+
+	my $url = $value->[0];
+    # if this is relative url is already an official url, don't embed the audio again
+    if( defined $url && $eprint->[0]->is_set( "official_url" ) && $eprint->[0]->get_value( "official_url" ) eq $url )
+    {
+		return [0, "BOOLEAN"];
+    }
+	
+	return [1, "BOOLEAN"] if $url =~ m#(http(s)?://(www\.)?)?soundcloud#;
+	return [0, "BOOLEAN"];
 }
