@@ -72,10 +72,6 @@
 	margin: 10px;
 }
 
-li img:hover {
-border: 5px solid #F15123;
-}
-
 div.downloads_grid {
 
   	display: flex;
