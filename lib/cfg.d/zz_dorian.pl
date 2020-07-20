@@ -160,7 +160,7 @@ sub run_url_to_embed
 
     my $url = $eprint->[0]->get_value($value->[0]);
 
-	$url =~ s#http(s)?://(www\.)?youtube.com/watch?v=(.+)#https://www.youtube.com/embed/$3#;
+	$url =~ s#http(s)?://(www\.)?youtube.com/watch\?v=(.+)#https://www.youtube.com/embed/$3#;
 	$url =~ s#http(s)?://(www\.)?youtu.be/(.+)#https://www.youtube.com/embed/$3#;
 
 	$url =~ s#http(s)?://(www\.)?vimeo.com/(.+)#https://player.vimeo.com/video/$3#;
