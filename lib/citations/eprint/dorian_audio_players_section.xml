@@ -46,15 +46,15 @@
                       </script>
 		</epc:if>
 		<epc:foreach expr="$item.property('related_url')" iterator="url">
-			<epc:if test="$item.relative_url_is_audio($url.property('url'))">
-				<div id="dorian_soundcloud_player_relative_{$index}" class="dorian_soundcloud_embed"/>
+			<epc:if test="$item.url_value_is_audio($url.property('url'))">
+				<div id="dorian_soundcloud_player_related_{$index}" class="dorian_soundcloud_embed"/>
 				<script type="text/javascript">
                 	//<![CDATA[
                     soundcloud_url = "https://w.soundcloud.com/player/?url=";
                     //]]>
 					soundcloud_url += "<epc:print expr="$url.property('url')"/>";
-					soundcloud_element = "dorian_soundcloud_player_relative_" + <epc:print expr="$index"/>;
-					soundcloud_iframe = "sc-widget-relative-" + <epc:print expr="$index"/>;
+					soundcloud_element = "dorian_soundcloud_player_related_" + <epc:print expr="$index"/>;
+					soundcloud_iframe = "sc-widget-related-" + <epc:print expr="$index"/>;
                     //<![CDATA[
                     (function(){
                     	let iframe = document.createElement('iframe');

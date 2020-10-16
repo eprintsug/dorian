@@ -2,7 +2,7 @@
 <cite:citation xmlns="http://www.w3.org/1999/xhtml" 
     xmlns:epc="http://eprints.org/ep3/control" 
     xmlns:cite="http://eprints.org/ep3/citation" >
-    <epc:if test="$item.has_type('audio') or $item.url_is_audio('official_url')">
+    <epc:if test="$item.has_type('audio') or $item.url_is_audio('official_url') or $item.field_has_audio('related_url_url')">
         <epc:print expr="$item.citation('dorian_audio_players_section')"/>
     </epc:if>
 </cite:citation>

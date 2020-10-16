@@ -200,7 +200,7 @@ sub run_iiif_manifest_enabled {
 	return [0, "BOOLEAN"]
 }
 
-
+# checks if given field (e.g. official_url) contains an audio URL - used to know if we need to display the audio section and when rendering an individual value
 sub run_url_is_audio {
     my($self, $state, $eprint, $value) = @_;
 
@@ -213,8 +213,24 @@ sub run_url_is_audio {
     return [0, "BOOLEAN"];
 }
 
-# pass a URL value from the relative_url field
-sub run_relative_url_is_audio {
+# checks if given field (e.g. related_urls) contains an audio URL - used to knwo if we need to display the audio section
+# checks all values in a field rather than an individual value, distinguishing it from run_url_value_is_audio
+sub run_field_has_audio {
+    my($self, $state, $eprint, $value) = @_;
+    if(!$eprint->[0]->isa("EPrints::DataObj::EPrint")) {
+        $self->runtime_error( 
+            "has_type() must be called on an eprint object. not : ".$eprint->[0] );
+    }
+    my @urls = @{$eprint->[0]->get_value($value->[0])};
+    foreach my $url ( @urls )
+    {
+        return [1, "BOOLEAN"] if $url =~ m#(http(s)?://(www\.)?)?soundcloud#;
+    }
+    return [0, "BOOLEAN"];
+}
+
+# pass a URL value from a field (e.g. related_url field) - used when emedding audio urls
+sub run_url_value_is_audio {
 	my( $self, $state, $eprint, $value ) = @_;
 	if( !$eprint->[0]->isa( "EPrints::DataObj::EPrint" ) )
 	{
@@ -222,7 +238,7 @@ sub run_relative_url_is_audio {
 	}
 
 	my $url = $value->[0];
-    # if this is relative url is already an official url, don't embed the audio again
+    # if this url is already an official url, don't embed the audio again
     if( defined $url && $eprint->[0]->is_set( "official_url" ) && $eprint->[0]->get_value( "official_url" ) eq $url )
     {
 		return [0, "BOOLEAN"];
