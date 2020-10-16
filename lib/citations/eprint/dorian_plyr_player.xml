@@ -23,6 +23,10 @@ jQuery(function() {
 		    new Plyr('#player_official_url');
     	}
 
+        jQuery('[id^=player_related_]').each( function() {
+            new Plyr("#" + this.id);
+    	});
+
     	jQuery('audio').each( function(ind) {
 		    init_plyr(this,ind);
     	});

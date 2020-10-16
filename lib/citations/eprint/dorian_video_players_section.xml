@@ -30,7 +30,20 @@
 		    allow="autoplay"></iframe>
 	     </div>
 	   </div>
-	 </epc:if>
+     </epc:if>
+     <epc:foreach expr="$item.property('related_url')" iterator="url">
+       <epc:if test="$item.url_value_is_video($url.property('url'))">
+         <div class="plyr_container">
+ 	       <div class="plyr__video-embed" id="player_related_{$index}">
+             <iframe
+               src="{$item.url_value_to_embed($url.property('url'))}"
+               allowfullscreen="true"
+               allowtransparency="true"
+               allow="autoplay"></iframe>
+	       </div>
+	     </div>
+       </epc:if>
+     </epc:foreach>
      <!--
      <epc:if test="$item.property('source') and $item.url_is_video('source')">
          <div class="plyr_container">

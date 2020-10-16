@@ -106,6 +106,8 @@ sub run_get_type
 
     return [$docs, "ARRAY"];
 }
+
+# does a field contain a url we want to display
 sub run_url_is_video
 {
     my( $self, $state, $eprint, $value ) = @_;
@@ -120,13 +122,42 @@ sub run_url_is_video
     # get the url
     my $url = $eprint->[0]->get_value( $value->[0] );
 
-    # if this is a 'source' field value and we already have the value in the 'official_url' field, don't show it again
-    if( $field_name eq "source" )
+    # if this url is represented by a document (i.e. it's a downloaded youtube video) don't show it again
+    foreach my $doc ($eprint->[0]->get_all_documents)
     {
-        if( defined $url && $eprint->[0]->is_set( "official_url" ) && $eprint->[0]->get_value( "official_url" ) eq $url )
+        foreach my $rel (@{$doc->value( "relation" )})
         {
-            return [0, "BOOLEAN"];
+            if( $rel->{type} eq EPrints::Utils::make_relation( "isYoutubeVideo" ) && 
+                ( $url eq $rel->{uri} ) )
+            {
+                # we already have this url as an upload, so we don't need to display it again
+                return [0, "BOOLEAN"];
+            }
         }
+    }
+
+    return [1, "BOOLEAN"] if defined $url && $url =~ m#http(s)?://(www\.)?youtube#;
+    return [1, "BOOLEAN"] if defined $url && $url =~ m#http(s)?://(www\.)?vimeo#;
+    return [0, "BOOLEAN"];
+}
+
+# is a url a video we want to display
+sub run_url_value_is_video
+{
+    my( $self, $state, $eprint, $value ) = @_;
+
+    if( ! $eprint->[0]->isa( "EPrints::DataObj::EPrint") )
+    {
+        $self->runtime_error( "has_type() must be called on an eprint object. not : ".$eprint->[0] );
+    }
+
+    # get the url
+    my $url = $value->[0];
+
+    # don't display if we have this elsewhere - i.e. if we have it in official url
+    if( defined $url && $eprint->[0]->is_set( "official_url" ) && $eprint->[0]->get_value( "official_url" ) eq $url )
+    {
+        return [0, "BOOLEAN"];
     }
 
     # if this url is represented by a document (i.e. it's a downloaded youtube video) don't show it again
@@ -146,8 +177,25 @@ sub run_url_is_video
     return [1, "BOOLEAN"] if defined $url && $url =~ m#http(s)?://(www\.)?youtube#;
     return [1, "BOOLEAN"] if defined $url && $url =~ m#http(s)?://(www\.)?vimeo#;
     return [0, "BOOLEAN"];
-
 }
+
+
+# checks if given field (e.g. related_url_url) contains a video URL - used to know if we need to display the video section
+sub run_field_has_video {
+    my($self, $state, $eprint, $value) = @_;
+    if(!$eprint->[0]->isa("EPrints::DataObj::EPrint")) {
+        $self->runtime_error( 
+            "has_type() must be called on an eprint object. not : ".$eprint->[0] );
+    }
+    my @urls = @{$eprint->[0]->get_value($value->[0])};
+    foreach my $url ( @urls )
+    {
+        return [1, "BOOLEAN"] if $url =~ m#http(s)?://(www\.)?youtube#;
+        return [1, "BOOLEAN"] if $url =~ m#http(s)?://(www\.)?vimeo#;
+    }
+    return [0, "BOOLEAN"];
+}
+
 sub run_url_to_embed
 {
     my( $self, $state, $eprint, $value ) = @_;
@@ -173,6 +221,33 @@ sub run_url_to_embed
 
     	return [$url, "STRING"];
 }
+
+sub run_url_value_to_embed
+{
+    my( $self, $state, $eprint, $value ) = @_;
+
+    if( ! $eprint->[0]->isa( "EPrints::DataObj::EPrint") )
+    {
+        $self->runtime_error( "has_type() must be called on an eprint object. not : ".$eprint->[0] );
+    }
+    my $repo = $state->{session}->get_repository;
+
+    my $url = $value->[0];
+
+	$url =~ s#http(s)?://(www\.)?youtube.com/watch\?v=(.+)#https://www.youtube.com/embed/$3#;
+	$url =~ s#http(s)?://(www\.)?youtu.be/(.+)#https://www.youtube.com/embed/$3#;
+
+	$url =~ s#http(s)?://(www\.)?vimeo.com/(.+)#https://player.vimeo.com/video/$3#;
+	if($url=~/vimeo/){
+		$url.=$repo->get_conf("dorian", "vimeo_options");
+	}
+	if($url=~/youtube/){
+		$url.=$repo->get_conf("dorian", "youtube_options");
+	}
+
+    	return [$url, "STRING"];
+}
+
 
 sub run_is_image
 {
@@ -213,7 +288,7 @@ sub run_url_is_audio {
     return [0, "BOOLEAN"];
 }
 
-# checks if given field (e.g. related_urls) contains an audio URL - used to knwo if we need to display the audio section
+# checks if given field (e.g. related_url_url) contains an audio URL - used to knwo if we need to display the audio section
 # checks all values in a field rather than an individual value, distinguishing it from run_url_value_is_audio
 sub run_field_has_audio {
     my($self, $state, $eprint, $value) = @_;
