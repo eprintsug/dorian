@@ -23,7 +23,6 @@ sub is_a_valid_dorian_doc {
 # calculate image dimensions
 $c->add_trigger( EP_TRIGGER_MEDIA_INFO, sub {
     my( %params ) = @_;
-
     my $epdata = $params{epdata};
     my $filename = $params{filename};
     my $repo = $params{repository};
@@ -31,14 +30,31 @@ $c->add_trigger( EP_TRIGGER_MEDIA_INFO, sub {
 
     return 0 if ! defined $epdata->{mime_type};
     return 0 if $epdata->{mime_type} !~ /image/;
+
+    # if there's some orientation data in there we need to flip the height and width or the image will look out of proportion
+    use Image::Magick;
+    my $image = Image::Magick->new;
+    $image->read( $filepath );
+    my $orientation = $image->Get( 'format', '%[EXIF:Orientation]');
+    my $rotated = 0;
+    $rotated = 1 if( defined $orientation && $orientation > 4 );
+
     my $media = $epdata->{media} ||= {};
     if( open(my $fh, 'identify -format "%w,%h" '.quotemeta($filepath)."|") ){
 		my $output = <$fh>;
 		close($fh);
 		chomp($output);
 		my( $width,$height ) = split /,\s*/, $output, 2;
-		$media->{width} = $width;
-		$media->{height} = $height;
+        if( $rotated == 0 )
+        {
+		    $media->{width} = $width;
+    		$media->{height} = $height;
+        }
+        else
+        {
+		    $media->{width} = $height;
+    		$media->{height} = $width;
+        }
    }
    return 0;
 }, priority => 5000);
