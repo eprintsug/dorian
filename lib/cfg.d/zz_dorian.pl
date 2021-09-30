@@ -32,13 +32,12 @@ $c->add_trigger( EP_TRIGGER_MEDIA_INFO, sub {
     return 0 if $epdata->{mime_type} !~ /image/;
 
     # if there's some orientation data in there we need to flip the height and width or the image will look out of proportion
-    use Image::Magick;
-    my $image = Image::Magick->new;
-    $image->read( $filepath );
-    my $orientation = $image->Get( 'format', '%[EXIF:Orientation]');
     my $rotated = 0;
-    $rotated = 1 if( defined $orientation && $orientation > 4 );
+    my $identify = "/usr/bin/identify";
 
+    my $orientation = system( $identify, "-format", '%[EXIF:Orientation]', $filepath );
+    $rotated = 1 if( defined $orientation && $orientation > 4 && $orientation < 9 );
+    
     my $media = $epdata->{media} ||= {};
     if( open(my $fh, 'identify -format "%w,%h" '.quotemeta($filepath)."|") ){
 		my $output = <$fh>;
