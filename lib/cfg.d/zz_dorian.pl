@@ -35,9 +35,11 @@ $c->add_trigger( EP_TRIGGER_MEDIA_INFO, sub {
     my $rotated = 0;
     my $identify = "/usr/bin/identify";
 
-    my $orientation = system( $identify, "-format", '%[EXIF:Orientation]', $filepath );
+    use Proc::Reliable;
+    my $myproc = Proc::Reliable->new();
+    my $orientation = $myproc->run( "$identify -format '%[EXIF:Orientation]' $filepath" );
     $rotated = 1 if( defined $orientation && $orientation > 4 && $orientation < 9 );
-    
+
     my $media = $epdata->{media} ||= {};
     if( open(my $fh, 'identify -format "%w,%h" '.quotemeta($filepath)."|") ){
 		my $output = <$fh>;
