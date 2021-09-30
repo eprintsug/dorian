@@ -27,18 +27,17 @@ $c->add_trigger( EP_TRIGGER_MEDIA_INFO, sub {
     my $filename = $params{filename};
     my $repo = $params{repository};
     my $filepath = $params{filepath};
-
+    
     return 0 if ! defined $epdata->{mime_type};
     return 0 if $epdata->{mime_type} !~ /image/;
-
+    
     # if there's some orientation data in there we need to flip the height and width or the image will look out of proportion
     my $rotated = 0;
-    my $identify = "/usr/bin/identify";
-
-    use Proc::Reliable;
-    my $myproc = Proc::Reliable->new();
-    my $orientation = $myproc->run( "$identify -format '%[EXIF:Orientation]' $filepath" );
-    $rotated = 1 if( defined $orientation && $orientation > 4 && $orientation < 9 );
+    if( open(my $fh, 'identify -format "%[EXIF:Orientation]" '.quotemeta($filepath)."|") ){
+        my $orientation = <$fh>;
+        close($fh);
+        $rotated = 1 if( defined $orientation && $orientation ne "" && $orientation > 4 && $orientation < 9 );
+    }
 
     my $media = $epdata->{media} ||= {};
     if( open(my $fh, 'identify -format "%w,%h" '.quotemeta($filepath)."|") ){
