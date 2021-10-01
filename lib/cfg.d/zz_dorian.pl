@@ -33,7 +33,7 @@ $c->add_trigger( EP_TRIGGER_MEDIA_INFO, sub {
     
     # if there's some orientation data in there we need to flip the height and width or the image will look out of proportion
     my $rotated = 0;
-    if( open(my $fh, 'identify -format "%[EXIF:Orientation]" '.quotemeta($filepath)."|") ){
+    if( open(my $fh, 'identify -quiet -format "%[EXIF:Orientation]" '.quotemeta($filepath)."|") ){
         my $orientation = <$fh>;
         close($fh);
         $rotated = 1 if( defined $orientation && $orientation ne "" && $orientation > 4 && $orientation < 9 );
